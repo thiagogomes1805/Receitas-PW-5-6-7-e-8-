@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+   <meta charset="UTF-8">
+   <title>Receita 5</title>
+   <style>
+      #painelControle {
+         margin-bottom: 20px;
+      }
+
+      .botao-link {
+         padding: 8px 16px;
+         margin-right: 8px;
+         background-color: #ff69b4;
+         color: white;
+         text-decoration: none;
+         border-radius: 4px;
+         display: inline-block;
+         font-family: Arial, sans-serif;
+      }
+
+      .botao-link:hover {
+         background-color: #ff1493;
+      }
+
+      .tabela-sorvetes {
+         border-collapse: collapse;
+         width: 100%;
+         max-width: 400px;
+         font-family: Arial, sans-serif;
+      }
+
+      .tabela-sorvetes th, 
+      .tabela-sorvetes td {
+         border: 1px solid #ddd;
+         padding: 10px;
+         text-align: left;
+      }
+
+      .tabela-sorvetes th {
+         background-color: #ff69b4;
+         color: white;
+      }
+
+      .tabela-sorvetes tr:nth-child(even) {
+         background-color: #ffe4e1;
+      }
+
+      .tabela-sorvetes tr:hover {
+         background-color: #ffc0cb;
+      }
+   </style>
+</head>
+
+<body>
+   <div id="painelControle">
+      <a href="#" id="linkCarregar" class="botao-link">Carregar sorvetes</a>
+      <a href="#" id="linkOrdenar" class="botao-link">Mostrar sorvetes ordenados</a>
+      <a href="#" id="linkEmbaralhar" class="botao-link">Embaralhar sorvetes</a>
+   </div>
+
+   <div id="meuAmor"></div>
+
+   <script>
+      let sorvetes = ["Chocolate", "Morango", "Flocos", "Maracujá", "Ninho com Nutella"]
+
+      const carregarDiv = (cervs) => {
+         let linhas = cervs.map(item => `<tr><td>🍦 ${item}</td></tr>`).join("\n")
+         let htmlTabela = `
+            <table class="tabela-sorvetes">
+               <thead>
+                  <tr><th>Sabor de Sorvete</th></tr>
+               </thead>
+               <tbody>
+                  ${linhas}
+               </tbody>
+            </table>
+         `
+         document.getElementById("meuAmor").innerHTML = htmlTabela
+      }
+
+      const acaoCarregar = (evento) => {
+         evento.preventDefault()
+         carregarDiv(sorvetes)
+      }
+
+      const ordenarSorvetes = (evento) => {
+         evento.preventDefault()
+         let ordenadas = [...sorvetes].sort()
+         carregarDiv(ordenadas)
+      }
+
+      const embaralharSorvetes = (evento) => {
+         evento.preventDefault()
+         let embaralhadas = [...sorvetes].toSorted(() => Math.random() - 0.5)
+         carregarDiv(embaralhadas)
+      }
+
+      document.getElementById("linkCarregar").addEventListener("click", acaoCarregar)
+      document.getElementById("linkOrdenar").addEventListener("click", ordenarSorvetes)
+      document.getElementById("linkEmbaralhar").addEventListener("click", embaralharSorvetes)
+   </script>
+</body>
+</html>

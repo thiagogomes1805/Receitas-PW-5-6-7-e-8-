@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">   
+   <head>
+      <meta charset="UTF-8">
+      <style>
+         .tabela-cervejas {
+            border-collapse: collapse;
+            width: 100%;
+            max-width: 600px;
+            font-family: Arial, sans-serif;
+         }
+         .tabela-cervejas th, .tabela-cervejas td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+         }
+         .tabela-cervejas th {
+            background-color: #333;
+            color: white;
+         }
+         .tabela-cervejas tr:nth-child(even) {
+            background-color: #f9f9f9;
+         }
+         .tabela-cervejas tr:hover {
+            background-color: #f1f1f1;
+         }
+      </style>      
+   </head>
+
+   <body>
+      <div><button id="botaoCarregar">Carregar cervejas</button></div>
+      <br>
+      <div id="cervejasDiv"></div>            
+   </body>   
+   
+   <script>
+      let cervejas = [
+         {
+            name: "Guiness", 
+            alcohol: "10%",
+            style: "Imperial Stout",
+            ibu: "45"            
+         }, 
+         {
+            name: "Desperados",
+            alcohol: "6%",
+            style: "Lager",
+            ibu: "20"             
+         }, 
+         {
+            name: "Becks",
+            alcohol: "5%",
+            style: "Pilsen",
+            ibu: "25"             
+         }
+      ]
+    
+      const carregarDiv = (cs, id = "cervejasDiv", cabecalhos = ["Nome", "Álcool", "Estilo", "Amargor"], propriedades = ["name", "alcohol", "style", "ibu"]) => {
+         const div = document.getElementById(id)
+         
+         const ths = cabecalhos.map(cab => `<th>${cab}</th>`).join("")
+         
+         const linhas = cs.map(item => {
+            const tds = propriedades.map(prop => `<td>${item[prop]}</td>`).join("")
+            return `<tr>${tds}</tr>`
+         }).join("\n")
+         
+         div.innerHTML = `
+            <table class="tabela-cervejas">
+               <thead>
+                  <tr>${ths}</tr>
+               </thead>
+               <tbody>
+                  ${linhas}
+               </tbody>
+            </table>
+         `
+      }
+
+      let botao = document.getElementById("botaoCarregar")
+      botao.addEventListener("click", () => carregarDiv(cervejas))                 
+   </script>
+</html>

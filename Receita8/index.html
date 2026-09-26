@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+   <meta charset="UTF-8">
+   <title>Receita 8 - Promises</title>
+   <style>
+      body {
+         font-family: Arial, sans-serif;
+         padding: 20px;
+         background-color: #f4f4f9;
+      }
+
+      button {
+         padding: 10px 20px;
+         background-color: #007BFF;
+         color: white;
+         border: none;
+         border-radius: 4px;
+         cursor: pointer;
+         font-size: 16px;
+         margin-bottom: 20px;
+      }
+
+      button:hover {
+         background-color: #0056b3;
+      }
+
+      .tabela-generica {
+         border-collapse: collapse;
+         width: 100%;
+         max-width: 800px;
+         background: white;
+         box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+         border-radius: 6px;
+         overflow: hidden;
+      }
+
+      .tabela-generica th, 
+      .tabela-generica td {
+         border: 1px solid #ddd;
+         padding: 12px 15px;
+         text-align: left;
+      }
+
+      .tabela-generica th {
+         background-color: #007BFF;
+         color: white;
+         text-transform: uppercase;
+         font-size: 14px;
+      }
+
+      .tabela-generica tr:nth-child(even) {
+         background-color: #f9f9f9;
+      }
+
+      .tabela-generica tr:hover {
+         background-color: #f1f1f1;
+      }
+   </style>
+</head>
+
+<body>
+   <div><button id="botaoCarregar">Carregar Endereços</button></div>
+   <div id="resultadoDiv"></div>            
+   
+   <script type="module">
+      import { criarTabela } from './tabela.js'
+
+      const carregarDados = () => {
+         document.getElementById("resultadoDiv").innerHTML = "<p>Fazendo requisição...</p>";
+         
+         fetch("https://random-data-api.com/api/v2/addresses?size=5")
+            .then(res => res.json())
+            .then(dados => {
+               criarTabela(
+                  dados, 
+                  ["Cidade", "País", "Estado", "Caixa Postal"], 
+                  ["city", "country", "state", "mail_box"], 
+                  "resultadoDiv"
+               )
+            })
+            .catch(err => {
+               document.getElementById("resultadoDiv").innerHTML = `<p style='color: red;'>Fudeu... ${err}</p>`
+            })
+      }
+
+      let botao = document.getElementById("botaoCarregar")
+      botao.addEventListener("click", carregarDados)
+   </script>
+</body>
+</html>s
