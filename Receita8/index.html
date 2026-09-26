@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-PT">
 <head>
    <meta charset="UTF-8">
    <title>Receita 8 - Promises</title>
@@ -67,7 +67,7 @@
       import { criarTabela } from './tabela.js'
 
       const carregarDados = () => {
-         document.getElementById("resultadoDiv").innerHTML = "<p>Fazendo requisição...</p>";
+         document.getElementById("resultadoDiv").innerHTML = "<p>A fazer requisição...</p>";
          
          fetch("https://random-data-api.com/api/v2/addresses?size=5")
             .then(res => res.json())
@@ -80,7 +80,7 @@
                )
             })
             .catch(err => {
-               document.getElementById("resultadoDiv").innerHTML = `<p style='color: red;'>Fudeu... ${err}</p>`
+               document.getElementById("resultadoDiv").innerHTML = `<p style='color: red;'>Erro... ${err}</p>`
             })
       }
 
@@ -88,4 +88,4 @@
       botao.addEventListener("click", carregarDados)
    </script>
 </body>
-</html>s
+</html>
